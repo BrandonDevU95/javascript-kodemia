@@ -6,12 +6,12 @@ let data = [
 ];
 
 // 1. Necesitamos una lista con los nombres completos de las personas que se encuentran en la data
-// const getFullNames = (data) => {
-// 	let fullNames = data.map((person) => `${person[0]} ${person[1]}`);
-// 	return fullNames;
-// };
+const getFullNames = (data) => {
+	let fullNames = data.map((person) => `${person[0]} ${person[1]}`);
+	return fullNames;
+};
 
-// console.log(getFullNames(data));
+console.log(getFullNames(data));
 
 // 2.- Necesitamos saber cual es la mayor y la menor edad de las personas en la lista
 
@@ -39,3 +39,13 @@ console.log(getMinMaxAge(data));
 //         age
 //     }
 // ]
+
+const restructureData = (data) => {
+	let restructuredData = data.map((person) => {
+		let [name, lastname, age] = person;
+		return { name, lastname, age };
+	});
+	return restructuredData;
+}
+
+console.log(restructureData(data));
