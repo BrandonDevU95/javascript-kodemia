@@ -73,24 +73,8 @@ const blogEntries = [
 	},
 ];
 
-console.log(blogEntries);
-
-/*
-<div class="card blog-card mb-3">
-    <img src="https://picsum.photos/id/237/200/300" alt="" />
-    <div class="card-body">
-      <h3 class="card-title">'Los Secretos de la Cocina Italiana'</h3>
-      <p class="card-text">
-        Explorar la cocina italiana va más allá de la pizza y la
-        pasta...
-      </p>
-    </div>
-  </div>
-</div>
-*/
-
 const createBlogCard = (entryObject) => {
-	let { image, title, abstract } = entryObject;
+	let { image, title, abstract, autor, avatar } = entryObject;
 
 	let card = document.createElement('div');
 	card.classList.add('card', 'blog-card', 'mb-3');
@@ -111,7 +95,41 @@ const createBlogCard = (entryObject) => {
 	let cardTextContent = document.createTextNode(abstract);
 	cardText.append(cardTextContent);
 
-	cardBody.append(cardTitle, cardText);
+	// Autor
+	let authorContainer = document.createElement('div');
+	authorContainer.classList.add('d-flex', 'align-items-center', 'my-3');
+
+	let authorAvatar = document.createElement('img');
+	authorAvatar.setAttribute('src', avatar);
+	authorAvatar.setAttribute('alt', 'Avatar del Autor');
+	authorAvatar.classList.add('rounded-circle', 'avatar-image');
+
+	let authorName = document.createElement('p');
+	authorName.classList.add('m-0', 'ps-3', 'fs-5', 'fst-italic');
+	let authorNameText = document.createTextNode(autor);
+	authorName.append(authorNameText);
+
+	authorContainer.append(authorAvatar, authorName);
+
+	// Fecha de Creacion y Rating
+	let dateRatingContainer = document.createElement('div');
+	dateRatingContainer.classList.add('text-end', 'px-3');
+
+	let dateTextContainer = document.createElement('p');
+	let dateTextCreation = document.createTextNode('Fecha de creacion /');
+	let dateSpanRating = document.createElement('span');
+	let dateTextRaring = document.createTextNode(entryObject.rating);
+
+	let buttonPost = document.createElement('button');
+	buttonPost.classList.add('btn', 'btn-primary', 'btn-lg');
+	let buttonText = document.createTextNode('Ir al post');
+	buttonPost.append(buttonText);
+
+	dateSpanRating.append(dateTextRaring);
+	dateTextContainer.append(dateTextCreation, dateSpanRating);
+	dateRatingContainer.append(dateTextContainer, buttonPost);
+
+	cardBody.append(cardTitle, cardText, authorContainer, dateRatingContainer);
 	card.append(cardImage, cardBody);
 
 	return card;
@@ -153,20 +171,6 @@ const printPopularEntries = (popularArray, wrapperId) => {
 	});
 };
 
-// printBlogCards(blogEntries, 'main-posts');
-
-printPopularEntries(
-	blogEntries.filter((entry) => entry.rating > 9),
-	'popular-entries'
-);
-
-/*
-<div class="d-flex align-items-center">
-    <img src="https://randomuser.me/api/portraits/men/38.jpg" alt="Avatar del Autor"
-        class="rounded-circle avatar-image">
-    <p class="m-0 ps-3 fs-5 fst-italic">Nombre del Autor</p>
-</div>
-*/
 
 const createAuthorInfo = (entryObject) => {
 	let { autor, avatar } = entryObject;
@@ -187,7 +191,7 @@ const createAuthorInfo = (entryObject) => {
 	authorContainer.append(authorAvatar, authorName);
 
 	return authorContainer;
-}	
+};
 
 const printAuthorInfo = (blogData, wrapperId) => {
 	let wrapper = document.getElementById(wrapperId);
@@ -196,5 +200,12 @@ const printAuthorInfo = (blogData, wrapperId) => {
 		wrapper.append(authorInfo);
 	});
 };
+
+printBlogCards(blogEntries, 'main-posts');
+
+printPopularEntries(
+	blogEntries.filter((entry) => entry.rating > 9),
+	'popular-entries'
+);
 
 printAuthorInfo(blogEntries, 'main-authors');
