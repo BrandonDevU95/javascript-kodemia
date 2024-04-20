@@ -538,26 +538,128 @@ const getRatingsList = (movies) => {
 // console.log(getRatingsList(movies));
 
 // 5. Obtener una lista de las películas que tienen una duración entre 2 rangos, por ejemplo las películas que duran entre 100 y 120 mins ( los valores de las duraciones deben ser dinámicos)
+
+const getMoviesByDuration = (movies, min, max) => {
+	return movies.filter((movie) => {
+		let duration = parseInt(movie.duration.split(' ')[0]);
+		return duration >= min && duration <= max;
+	});
+};
+
+console.log(getMoviesByDuration(movies, 100, 120));
+
 // 6. Obtener una lista de películas con base en su clasificación
+
+const getMoviesByRating = (movies, rating) => {
+	return movies.filter((movie) => movie.rating === rating);
+};
+
+console.log(getMoviesByRating(movies, 'R'));
+
 // 7. Obtener una lista de películas películas estrenadas en un rango de años (por ejemplo, entre 2000 - 2010, los valores de los años deben ser dinámicos)
+
+const getMoviesByReleaseYear = (movies, min, max) => {
+	return movies.filter((movie) => movie.releaseYear >= min && movie.releaseYear <= max);
+}
+
+console.log(getMoviesByReleaseYear(movies, 2000, 2010));
+
 // 8. Obtener una lista de películas con base en el país al que pertenecen
+
+const getMoviesByCountry = (movies, country) => {
+	return movies.filter((movie) => movie.country === country);
+}
+
+console.log(getMoviesByCountry(movies, 'Estados Unidos'));
+
 // 9. Obtener una lista de las películas que no obtuvieron premios Óscar
+
+const getMoviesWithoutOscars = (movies) => {
+	return movies.filter((movie) => movie.oscarAwards === 0);
+}
+
+console.log(getMoviesWithoutOscars(movies));
+
 // 10. Obtener la cantidad de películas de cada clasficación. Esta información debe estar organizada de la siguiente forma:
 //         {
 //             [nombre_de_la_clasificacion]:[cantidad]
 //         }
 //         Es decir, la propiedad del objeto resultante deber ser la clasificación, y el valor de esa propiedad debe ser la cantidad de películas que pertenecen a esa clasificación
-// 11. Obtener la cantidad de películas de cada país, organizada de la siguiente forma:
-//         {
-//             [pais]:[cantidad]
-//         }
-// 12. Obtener la edad promedio de los actores protagonistas
-// 13. Dado el nombre de un actor, obtener la cantidad de películas de la lista en las que aparece
-// 14. Obtener una lista que contenga objetos de cada película con el siguiente formato:
-    
-//     {
-//         title: "{titulo_de_la_película} - {director} - {duración}",
-//         trimmedSynopsis: "{sinopsis}..."
-//     }
+/*
+    11. Obtener la cantidad de películas de cada país, organizada de la siguiente forma:
+        {
+            [pais]:[cantidad]
+        }
+*/
 
-// **trimmedSynopsis debe estar limitada a 10 palabras, y debe tener puntos suspensivos al final.
+const organizeMoviesByProperty = (dataArray, propertyName) => {
+  let result = dataArray.reduce((accum, current) => {
+    return accum[current[propertyName]]
+      ? { ...accum, [current[propertyName]]: accum[current[propertyName]] + 1 }
+      : { ...accum, [current[propertyName]]: 1 };
+  }, {});
+  return result;
+};
+
+let organizeByRating = organizeMoviesByProperty(movies, "rating");
+let organizeByCountry = organizeMoviesByProperty(movies, "country");
+let organizeByGenre = organizeMoviesByProperty(movies, "genre");
+
+console.log(organizeByRating);
+console.log(organizeByCountry);
+console.log(organizeByGenre);
+
+/*
+    12. Obtener la edad promedio de los actores protagonistas
+*/
+
+const getProtagonistAverageAge = (dataArray) => {
+  let result = dataArray.reduce((accum, current, _, arr) => {
+    let subResult = current.protagonists.reduce((accum, current, _, arr) => {
+      return accum + current.age / arr.length;
+    }, 0);
+    return accum + subResult / arr.length;
+  }, 0);
+  return result;
+};
+
+console.log(getProtagonistAverageAge(movies));
+
+/*
+    13. Dado el nombre de un actor, obtener la cantidad de películas de la lista en las que aparece
+*/
+
+const getActorAppearences = (dataArray, actorName) => {
+  let result = dataArray.reduce((accum, current) => {
+    return current.protagonists.some((actor) => actor.name === actorName)
+      ? accum + 1
+      : accum;
+  }, 0);
+  return result;
+};
+
+console.log(getActorAppearences(movies, "Kevin Spacey"));
+
+/*
+   14. Obtener una lista que contenga objetos de cada película con el siguiente formato:
+    
+    {
+        title: "{titulo_de_la_película} - {director} - {duración}",
+        trimmedSynopsis: "{sinopsis}..."
+    }
+
+    **trimmedSynopsis debe estar limitada a 10 palabras, y debe tener puntos suspensivos al final.
+*/
+
+const getShortMoviesObject = (dataArray) => {
+  let result = dataArray.map((movie) => {
+    let { title, synopsis } = movie;
+    let trimmedSynopsis = `${synopsis.split(" ", 10).join(" ")}...`;
+    return { title, trimmedSynopsis };
+  });
+  return result;
+};
+
+console.log(getShortMoviesObject(movies));
+
+/*Happy Hacking Koders!!!*/
