@@ -153,9 +153,48 @@ const printPopularEntries = (popularArray, wrapperId) => {
 	});
 };
 
-printBlogCards(blogEntries, 'main-posts');
+// printBlogCards(blogEntries, 'main-posts');
 
 printPopularEntries(
 	blogEntries.filter((entry) => entry.rating > 9),
 	'popular-entries'
 );
+
+/*
+<div class="d-flex align-items-center">
+    <img src="https://randomuser.me/api/portraits/men/38.jpg" alt="Avatar del Autor"
+        class="rounded-circle avatar-image">
+    <p class="m-0 ps-3 fs-5 fst-italic">Nombre del Autor</p>
+</div>
+*/
+
+const createAuthorInfo = (entryObject) => {
+	let { autor, avatar } = entryObject;
+
+	let authorContainer = document.createElement('div');
+	authorContainer.classList.add('d-flex', 'align-items-center', 'mb-3');
+
+	let authorAvatar = document.createElement('img');
+	authorAvatar.setAttribute('src', avatar);
+	authorAvatar.setAttribute('alt', 'Avatar del Autor');
+	authorAvatar.classList.add('rounded-circle', 'avatar-image');
+
+	let authorName = document.createElement('p');
+	authorName.classList.add('m-0', 'ps-3', 'fs-5', 'fst-italic');
+	let authorNameText = document.createTextNode(autor);
+	authorName.append(authorNameText);
+
+	authorContainer.append(authorAvatar, authorName);
+
+	return authorContainer;
+}	
+
+const printAuthorInfo = (blogData, wrapperId) => {
+	let wrapper = document.getElementById(wrapperId);
+	blogData.forEach((entry) => {
+		let authorInfo = createAuthorInfo(entry);
+		wrapper.append(authorInfo);
+	});
+};
+
+printAuthorInfo(blogEntries, 'main-authors');
