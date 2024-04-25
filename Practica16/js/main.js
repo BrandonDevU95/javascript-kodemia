@@ -4,11 +4,6 @@ let filterCategories = document.getElementById('dropdown-categories');
 let products = [];
 let categories = [];
 
-filterCategories.addEventListener('click', (event) => {
-	console.log(event.target.id);
-});
-
-
 createPersonButton.addEventListener('click', (event) => {
 	event.preventDefault();
 	let fields = document.querySelectorAll('#product-form input');
@@ -31,6 +26,14 @@ createPersonButton.addEventListener('click', (event) => {
 	products.push(productObject);
 
 	printProductList(products, 'products-list');
+});
+
+filterCategories.addEventListener('click', (event) => {
+	let category = event.target.id;
+	let filteredProducts = products.filter(
+		(product) => product.category === category
+	);
+	printProductList(filteredProducts, 'products-list');
 });
 
 const createProductCard = (productObject) => {
