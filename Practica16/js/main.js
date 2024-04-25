@@ -1,6 +1,13 @@
 let createPersonButton = document.getElementById('create-product');
+let filterCategories = document.getElementById('dropdown-categories');
 
 let products = [];
+let categories = [];
+
+filterCategories.addEventListener('click', (event) => {
+	console.log(event.target.id);
+});
+
 
 createPersonButton.addEventListener('click', (event) => {
 	event.preventDefault();
@@ -11,12 +18,17 @@ createPersonButton.addEventListener('click', (event) => {
 		let property = field.name;
 		let value = field.value;
 
+		if (field.name === 'category') {
+			if (!categories.includes(value)) {
+				categories.push(value);
+				addCategoriesDropdown(categories, 'dropdown-categories');
+			}
+		}
+
 		productObject[property] = value;
 	});
 
 	products.push(productObject);
-
-	console.log(products);
 
 	printProductList(products, 'products-list');
 });
@@ -24,7 +36,12 @@ createPersonButton.addEventListener('click', (event) => {
 const createProductCard = (productObject) => {
 	let { name, description, price, image } = productObject;
 	let productContainerItem = document.createElement('div');
-	productContainerItem.classList.add('col-12','col-md-6', 'col-lg-6', 'pb-3');
+	productContainerItem.classList.add(
+		'col-12',
+		'col-md-6',
+		'col-lg-6',
+		'pb-3'
+	);
 
 	let productListItem = document.createElement('div');
 	productListItem.classList.add('card', 'card-width');
@@ -39,18 +56,18 @@ const createProductCard = (productObject) => {
 	let productTitleBody = document.createElement('h5');
 	productTitleBody.classList.add('card-title');
 	let productTitleText = document.createTextNode(name);
-	productTitleBody.append(productTitleText); //Insertar en body
+	productTitleBody.append(productTitleText);
 
 	let productDescriptionBody = document.createElement('p');
 	productDescriptionBody.classList.add('card-text');
 	const cuttedDescription = cutDescription(description);
 	let productDescriptionText = document.createTextNode(cuttedDescription);
-	productDescriptionBody.append(productDescriptionText); //Insertar en body
+	productDescriptionBody.append(productDescriptionText);
 
 	let productPrice = document.createElement('p');
 	productPrice.classList.add('fw-bold');
 	let priceText = document.createTextNode(`$${price}MXN`);
-	productPrice.append(priceText); //Insertar en Body
+	productPrice.append(priceText);
 
 	productCardBody.append(
 		productTitleBody,
@@ -81,4 +98,28 @@ const cutDescription = (description) => {
 	} else {
 		return description;
 	}
-}
+};
+
+const createCategori = (category) => {
+	let listItem = document.createElement('li');
+	let link = document.createElement('a');
+	link.classList.add('dropdown-item');
+	link.setAttribute('id', category);
+	let text = document.createTextNode(category);
+	link.append(text);
+	listItem.append(link);
+
+	return listItem;
+};
+
+const addCategoriesDropdown = (categoriesArray, wrapperId) => {
+	let wrapper = document.getElementById(wrapperId);
+
+	while (wrapper.firstChild) {
+		wrapper.removeChild(wrapper.firstChild);
+	}
+
+	categoriesArray.forEach((category) =>
+		wrapper.append(createCategori(category))
+	);
+};
