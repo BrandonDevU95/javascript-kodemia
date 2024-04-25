@@ -1,4 +1,5 @@
 let createPersonButton = document.getElementById('create-product');
+let dropdownMenu = document.getElementById('dropdown-menu');
 let filterCategories = document.getElementById('dropdown-categories');
 
 let products = [];
@@ -24,8 +25,8 @@ createPersonButton.addEventListener('click', (event) => {
 	});
 
 	products.push(productObject);
-
 	printProductList(products, 'products-list');
+	dropdownMenu.classList.remove('d-none');
 });
 
 filterCategories.addEventListener('click', (event) => {
