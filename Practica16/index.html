@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketplace</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="row container-fluid pt-3">
+        <div class="col-lg-6">
+            <h2>Agregar Producto</h2>
+            <form action="" id="product-form" class="bg-dark text-white border rounded shadow p-3">
+                <div class="form-group">
+                    <label for="">Nombre del producto:</label>
+                    <input type="text" name="name" class="form-control" value="Jabon de manos" />
+                </div>
+                <div class="form-group">
+                    <label for="">Descripcion:</label>
+                    <input type="text" name="description" class="form-control"
+                        value="Este producto es un jabon para manos con diferentes fragancias que puedes adquirir a un bajo costo" />
+                </div>
+                <div class="form-group">
+                    <label for="">Precio:</label>
+                    <input type="number" name="price" class="form-control" value=45 />
+                </div>
+                <div class="form-group">
+                    <label for="">Categoria:</label>
+                    <input type="text" name="category" class="form-control" value="Jabon" />
+                </div>
+                <div class="form-group">
+                    <label for="">Imagen:</label>
+                    <input type="text" name="image" class="form-control" value="https://picsum.photos/200/150" />
+                </div>
+                <div class="pt-3">
+                    <button id="create-product" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <div class="d-flex justify-content-between">
+                <h2>Productos</h2>
+                <div class="nav-item dropdown border border-2 border-black rounded p-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categorias
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="products-list" class="row"></div>
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
