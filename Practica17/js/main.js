@@ -21,7 +21,10 @@ const postKoder = async (koderObject) => {
 		body: JSON.stringify(koderObject),
 	});
 	let data = await response.json();
-	console.log(data);
+	console.log(data)
+
+	if(data) printKodersList('koders-list');
+	else console.error('Error al crear el koder');
 };
 
 const createKoderList = (koder) => {
@@ -80,10 +83,6 @@ createKoderButton.addEventListener('click', (e) => {
 	});
 
 	postKoder(koderObject);
-
-	setTimeout(() => {
-		printKodersList('koders-list');
-	}, 1000);
 });
 
 printKodersList('koders-list');
