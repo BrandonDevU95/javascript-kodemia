@@ -21,7 +21,6 @@ const postKoder = async (koderObject) => {
 		body: JSON.stringify(koderObject),
 	});
 	let data = await response.json();
-	console.log(data)
 
 	if(data) printKodersList('koders-list');
 	else console.error('Error al crear el koder');
