@@ -1,10 +1,12 @@
 const wrapper = document.getElementById('posts-list');
-let createPersonButton = document.getElementById('create-product');
+let createPersonButton = document.getElementById('create-post');
 const db = 'https://kodemia-blog-935ba-default-rtdb.firebaseio.com/blog/.json';
 
 createPersonButton.addEventListener('click', (event) => {
 	event.preventDefault();
-	let fields = document.querySelectorAll('#product-form input');
+	let fields = document.querySelectorAll(
+		'#post-form input , #post-form textarea'
+	);
 	let postObject = {};
 
 	fields.forEach((field) => {
@@ -15,6 +17,7 @@ createPersonButton.addEventListener('click', (event) => {
 	});
 
 	postPosts(postObject);
+	document.getElementById('post-form').reset();
 });
 
 const createPost = (post) => {
