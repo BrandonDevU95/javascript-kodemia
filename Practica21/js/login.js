@@ -11,6 +11,11 @@ loginBtn.addEventListener('click', () => {
 		userObject[property] = value;
 	});
 
-	console.log(userObject);
+	/*Este token debería venir de una base de datos pero lo estamos simulando*/
+	let token =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
+	localStorage.setItem('token', token);
+	window.open('../views/catalogo.html', '_self');
 	document.getElementById('login-form').reset();
 });
