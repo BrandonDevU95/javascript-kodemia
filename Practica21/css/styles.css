@@ -1,0 +1,5 @@
+.banner {
+  height: calc(100vh - 68.98px - 240px);
+  -o-object-fit: cover;
+     object-fit: cover;
+}/*# sourceMappingURL=styles.css.map */
