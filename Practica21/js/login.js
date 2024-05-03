@@ -1,4 +1,11 @@
 const loginBtn = document.getElementById('login-btn');
+const token = localStorage.getItem('token');
+
+console.log(token);
+
+token
+	? window.open('../views/catalogo.html', '_self')
+	: window.open('../views/loginForm.html', '_self');
 
 loginBtn.addEventListener('click', () => {
 	let fields = document.querySelectorAll('#login-form input');
