@@ -5,7 +5,7 @@ console.log(token);
 
 token
 	? window.open('../views/catalog.html', '_self')
-	: window.open('../views/loginForm.html', '_self');
+	: window.open('../views/login.html', '_self');
 
 loginBtn.addEventListener('click', () => {
 	let fields = document.querySelectorAll('#login-form input');
