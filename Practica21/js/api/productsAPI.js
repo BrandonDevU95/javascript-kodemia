@@ -25,8 +25,16 @@ const createProduct = async (petObject) => {
 	return data;
 };
 
-const getProductById = async (petKey) => {
-	let response = await fetch(`${PRODUCTS_BASE_URL}/${petKey}/.json`);
+const deleteProduct = async (productId) => {
+	let response = await fetch(`${PRODUCTS_BASE_URL}/${productId}.json`, {
+		method: 'DELETE',
+	});
+	let data = await response.json();
+	return data;
+};
+
+const getProductById = async (productId) => {
+	let response = await fetch(`${PRODUCTS_BASE_URL}/${productId}/.json`);
 	let data = await response.json();
 	return data;
 };
@@ -42,4 +50,11 @@ const getAllProducts = async () => {
 	return petsArray;
 };
 
-export { createDB, verifyDB, createProduct, getProductById, getAllProducts };
+export {
+	createDB,
+	verifyDB,
+	createProduct,
+	deleteProduct,
+	getProductById,
+	getAllProducts,
+};
