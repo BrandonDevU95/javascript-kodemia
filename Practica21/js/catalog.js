@@ -2,9 +2,13 @@ import { getAllProducts } from '../js/api/productsAPI.js';
 const wrapperId = document.getElementById('list-products');
 
 const createProductCard = (productObject) => {
-	const { title, image, price } = productObject;
+	const { title, image, price, key } = productObject;
 	const colDiv = document.createElement('div');
 	colDiv.classList.add('col');
+
+	const anchor = document.createElement('a');
+	anchor.setAttribute('href', `../views/details.html?productKey=${key}`);
+	anchor.classList.add('text-decoration-none');
 
 	const cardDiv = document.createElement('div');
 	cardDiv.classList.add(
@@ -50,7 +54,8 @@ const createProductCard = (productObject) => {
 	cardDiv.appendChild(img);
 	cardDiv.appendChild(cardBodyDiv);
 
-	colDiv.appendChild(cardDiv);
+	anchor.appendChild(cardDiv);
+	colDiv.appendChild(anchor);
 
 	return colDiv;
 };
