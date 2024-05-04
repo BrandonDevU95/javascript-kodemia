@@ -7,7 +7,7 @@ const createProductCard = (productObject) => {
 	colDiv.classList.add('col');
 
 	const anchor = document.createElement('a');
-	anchor.setAttribute('href', `../views/details.html?productKey=${key}`);
+	anchor.setAttribute('href', `../views/details.html?id=${key}`);
 	anchor.classList.add('text-decoration-none');
 
 	const cardDiv = document.createElement('div');

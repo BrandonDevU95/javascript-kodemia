@@ -25,7 +25,7 @@ const createProduct = async (petObject) => {
 	return data;
 };
 
-const getProductByKey = async (petKey) => {
+const getProductById = async (petKey) => {
 	let response = await fetch(`${PRODUCTS_BASE_URL}/${petKey}/.json`);
 	let data = await response.json();
 	return data;
@@ -42,4 +42,4 @@ const getAllProducts = async () => {
 	return petsArray;
 };
 
-export { createDB, verifyDB, createProduct, getProductByKey, getAllProducts };
+export { createDB, verifyDB, createProduct, getProductById, getAllProducts };
