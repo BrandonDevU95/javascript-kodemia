@@ -1,4 +1,8 @@
 .banner {
-	height: calc(100vh - 68.98px - 240px);
+	height: calc(100vh - 68.98px - 192px);
 	object-fit: cover;
+}
+
+.container-vh {
+	height: calc(100vh - 68.98px - 192px);
 }
